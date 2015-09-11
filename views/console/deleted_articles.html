@@ -1,0 +1,41 @@
+<div class="container" style="margin-bottom: 56px">
+    <table class="ui celled table">
+        <thead>
+        <tr>
+            <th>标题</th>
+            <th>标签</th>
+            <th>PV</th>
+            <th>发布时间</th>
+            <th>修改时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{range $.articles}}
+        {{with .Data}}
+        <tr>
+            <td><a href="/trash/{{obj2str .Id}}" target="_blank">{{.Title}}</a></td>
+            <td>{{.Tags}}</td>
+            <td>{{.PV}}</td>
+            <td>{{dateformat .CreateTime "2006-01-02 15:04:05"}}</td>
+            <td>{{dateformat .UpdateTime "2006-01-02 15:04:05"}}</td>
+            <td><button class="ui tiny button rollback">Rollback!</button></td>
+        </tr>
+        {{end}}
+        {{end}}
+        </tbody>
+    </table>
+</div>
+<script>
+    require(['js/article']);
+</script>
+<div class="ui small modal transition hidden rollbackConfirm">
+    <div class="header">恢复文章! </div>
+    <div class="content">
+        <p>你确定恢复该删除的文章吗？</p>
+    </div>
+    <div class="actions">
+        <div class="ui negative button">No </div>
+        <div class="ui positive right labeled icon button">Yes <i class="checkmark icon"></i> </div>
+    </div>
+</div>

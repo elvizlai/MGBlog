@@ -1,0 +1,17 @@
+<div class="ui vertical menu sticky side container">
+    <div class="header item">
+        Search
+    </div>
+    {{range .categoryList}}
+    <a class="teal item" href="/category?id={{.Id}}">
+        {{.Name}}
+        <div class="ui teal label">{{.Count}}</div>
+    </a>
+    {{end}}
+    <div class="item">
+        <div class="ui transparent icon input">
+            <input type="text" placeholder="Searching...">
+            <i class="search icon"></i>
+        </div>
+    </div>
+</div>

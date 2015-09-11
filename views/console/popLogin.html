@@ -1,0 +1,28 @@
+<div class="ui small modal transition hidden popLogin">
+    <div class="header">登录 </div>
+    <div class="column">
+        <div class="ui form segment verifyForm">
+            <div class="ui negative message" style="display: none">
+                <i class="close icon"></i>
+                <div class="header" id="Error"></div>
+            </div>
+            <form id="loginForm" class="validate">
+                <div class="field">
+                    <label>Email</label>
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" name="email" id="email" placeholder="Input your email">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Password</label>
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input name="password" type="password" id="password" placeholder="Input your password">
+                    </div>
+                </div>
+                <div class="ui blue button" id="login">Login</div>
+            </form>
+        </div>
+    </div>
+</div>

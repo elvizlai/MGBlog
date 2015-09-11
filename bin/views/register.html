@@ -1,0 +1,55 @@
+{{set $ "Title" "Register"}}
+{{if $.CanBeRegister}}
+<div class="main container" style="width: 400px">
+    <div class="ui negative message" style="display: none">
+        <i class="close icon"></i>
+
+        <div class="header" id="Error"></div>
+    </div>
+    <form class="ui form validate" id="registerForm">
+        <h4 class="ui dividing header">Account Info</h4>
+
+        <div class="required field">
+            <label>Email</label>
+
+            <div class="ui icon input">
+                <i class="mail icon"></i>
+                <input type="text" placeholder="Email" name="email" id="email">
+            </div>
+        </div>
+        <div class="required field">
+            <label>Nickname</label>
+
+            <div class="ui icon input">
+                <i class="user icon"></i>
+                <input type="text" name="nickname" id="nickname">
+            </div>
+        </div>
+        <div class="required field">
+            <label>Password</label>
+
+            <div class="ui icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" id="password">
+            </div>
+        </div>
+        <div class="required field">
+            <label>ConfirmPassword</label>
+
+            <div class="ui icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="repeatpassword" id="repeatpassword">
+            </div>
+        </div>
+        <div class="ui submit button" id="registerSubmit">Register</div>
+        <div class="ui error message"></div>
+    </form>
+</div>
+<script>
+    require(['js/console']);
+</script>
+{{else}}
+<div class="main container" style="width: 400px">
+    <h1>暂未开放注册</h1>
+</div>
+{{end}}

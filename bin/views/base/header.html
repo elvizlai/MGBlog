@@ -1,0 +1,19 @@
+<div class="ui main menu">
+    <div class="header item" onclick="window.open('/','_self')">
+        <em>ElvizLai's Blog</em>
+    </div>
+    <a class="item {{if $.isHome}}active{{end}}" href="/">
+        <i class="icon home"></i>Home
+    </a>
+    <a class="item {{if $.isArchives}}active{{end}}" href="/archives">
+        <i class="icon calendar"></i>Archives
+    </a>
+    <a class="item {{if $.isMe}}active{{end}}" href="/me">
+        <i class="icon qrcode"></i>Me
+    </a>
+    {{if $.isLogin}}
+    <div class="right item">
+        <div class="ui button icon" onclick="window.open('/newArticle','_self')"><i class="icon dashboard"></i> NEW</div>
+    </div>
+    {{end}}
+</div>

@@ -1,0 +1,171 @@
+body {
+    background-image: url("../img/bg.png");
+}
+
+.wrapper {
+    padding: 0;
+    margin: 0 0 -49px 0;
+    min-height: 100%;
+    /*min-width: 800px;*/
+}
+
+.container {
+    padding-bottom: 56px;
+    max-width: 1200px;
+    margin: auto;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.footer {
+    height: 48px;
+    background-color: white;
+    border-top: 1px solid #d6d6d6;
+    clear: both;
+    width: 100%;
+    color: #888888;
+}
+
+a {
+    color: #444;
+}
+
+a:hover {
+    color: #258fb8;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.side.container {
+    position: fixed;
+    min-height: 0;
+    margin-left: -40px;
+}
+
+.main.container {
+    width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.title {
+    margin-top: auto;
+}
+
+.title a {
+    color: #444;
+}
+
+.title a:hover {
+    color: #258fb8;
+}
+
+.alignright {
+    float: right;
+}
+
+.ui.button {
+    margin: .25em 0 0;
+}
+
+.ui.form .field > label.error {
+    color: #d40000;
+}
+
+.fa-ul,
+.markdown-body .task-list-item, li.L0, li.L1, li.L2, li.L3, li.L5, li.L6,
+li.L7, li.L8 {
+    list-style-type: decimal;
+}
+
+pre.prettyprint {
+    width: auto;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f7f7f7;
+    overflow: auto;
+    font-size: 96%;
+    line-height: 1.45;
+}
+
+ol.linenums {
+    color: #999;
+    padding-left: 2.5em;
+}
+
+/*表格相关*/
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    display: block;
+    width: auto;
+    overflow: auto;
+    word-break: normal;
+
+    padding: 20px;
+    text-align: left;
+    word-wrap: break-word;
+
+    margin-top: 0;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+tr {
+    border-top: 1px solid #ccc;
+}
+
+th {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+    font-weight: 700;
+    background-color: #F8F8F8;
+}
+
+td {
+    padding: 6px 13px;
+    border: 1px solid #ddd;
+}
+
+#pagination .prev::before {
+    content: '\f053';
+    padding-right: 10px;
+    font-family: FontAwesome;
+}
+
+#pagination .next::after {
+    content: '\f054';
+    padding-left: 10px;
+    font-family: FontAwesome;
+}
+
+#pagination a {
+    display: block;
+    padding: 5px 10px;
+    background: #ddd;
+    color: #999;
+    font-family: "Lato", Helvetica Neue, Helvetica, Arial, sans-serif;
+    text-shadow: 0 0 1px #fff;
+    margin-bottom: 50px;
+}
+
+.alignleft {
+    float: left;
+}
+
+.alignright {
+    float: right;
+}
+
+hr {
+    height: 1px;
+    border: none;
+    border-top: 1px solid #ddd;
+    background: 0 0;
+}

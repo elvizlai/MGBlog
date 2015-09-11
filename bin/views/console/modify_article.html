@@ -1,0 +1,37 @@
+{{set $ "Title" "Modify Article"}}
+{{with $.article}}
+<form style="margin-top: -4px;padding-bottom: 4px;text-align: center" class="validate">
+    <div class="ui labeled input field" style="width: 50%">
+        <div class="ui label">标题:</div>
+        <label for="title"></label><input id="title" name="title" type="text" value="{{.Title}}">
+        <div class="ui corner label">
+            <i class="asterisk icon"></i>
+        </div>
+    </div>
+    <div class="ui labeled input">
+        <div class="ui label">标签:</div>
+        <input id="tags" type="text" placeholder="多个标签用;隔开" value="{{slice2str .Tags}}">
+    </div>
+    <div id="modifyBtn" class="ui green button">Save</div>
+    <div id="deleteBtn" class="ui red button">Delete!</div>
+</form>
+<div id="layout" style="padding-bottom: 48px">
+    <div id="editor">
+        <textarea style="display:none;">{{.Markdown}}</textarea>
+    </div>
+</div>
+<div class="ui small modal transition hidden delConfirm">
+    <div class="header">删除文章! </div>
+    <div class="content">
+        <p>你确定删除文章 {{.Title}} 吗？</p>
+    </div>
+    <div class="actions">
+        <div class="ui negative button">No </div>
+        <div class="ui positive right labeled icon button">Yes <i class="checkmark icon"></i> </div>
+    </div>
+</div>
+{{end}}
+<script>
+    require(['js/article']);
+</script>
+{{template "console/popLogin.html" $}}

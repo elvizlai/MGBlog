@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>访问统计</title>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:720px"></div>
+<!-- ECharts单文件引入 -->
+<script src="/static/js/lib/jquery-2.1.4.min.js"></script>
+<script src="/static/js/lib/echarts-all.min.js"></script>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var option = {
+        title: {
+            text: '访问者区域热点分布图',
+            x: 'center'
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            data: ['visitor']
+        },
+        dataRange: {
+            min: 1,
+            max: 500,
+            calculable: true,
+            color: ['maroon', 'purple', 'red', 'orange', 'yellow', 'lightgreen']
+        },
+        toolbox: {
+            show: true,
+            orient: 'vertical',
+            x: 'right',
+            y: 'center',
+            feature: {
+                mark: {show: false},
+                dataView: {show: false, readOnly: false},
+                restore: {show: true},
+                saveAsImage: {show: true}
+            }
+        },
+        series: [
+            {
+                name: 'visitor',
+                type: 'map',
+                mapType: 'china',
+                hoverable: false,
+                roam: true,
+                data: [],
+                markPoint: {
+                    symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                    itemStyle: {
+                        normal: {
+                            borderColor: '#87cefa',
+                            borderWidth: 1,            // 标注边线线宽，单位px，默认为1
+                            label: {
+                                show: false
+                            }
+                        },
+                        emphasis: {
+                            borderColor: '#1e90ff',
+                            borderWidth: 5,
+                            label: {
+                                show: false
+                            }
+                        }
+                    },
+                    data: []
+                },
+                geoCoord: {}
+            }
+        ]
+    };
+
+    //数据获取
+    $.post("/visitormap", "", function (d) {
+        if (d.data) {
+            option.series[0].markPoint.data = d.data;
+            option.series[0].geoCoord = d.geoCoord;
+        }
+        // 为echarts对象加载数据
+        myChart.setOption(option);
+    });
+
+</script>
+</body>

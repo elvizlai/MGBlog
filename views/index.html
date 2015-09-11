@@ -1,0 +1,28 @@
+{{set $ "isHome" true}}
+{{set $ "Title" "ElvizLai's Tech Blog"}}
+<div class="ui stackable grid" style="padding-bottom: 48px;width: 100%">
+    <div class="thirteen wide column segment">
+        {{with $.articles}}
+        {{range .}}
+        <div class="ui raised segment" style="margin-left: 2%">
+            <a class="ui teal ribbon label">{{dateformat .CreateTime "2006-01-02"}}</a>
+            <a style="font-size: x-large;font-weight: 800;vertical-align: middle" href="/article/{{obj2str .Id}}">{{.Title}}</a>
+            <div class="ui divider"></div>
+            <div class="editormd-view" id="{{obj2str .Id}}">
+                <div class="abstract">
+                    {{str2html .Abstract}}
+                </div>
+            </div>
+            <div class="ui divider"></div>
+            {{range .Tags}}
+            <a class="ui tiny tag label" style="margin: 2px 5px 2px 5px" href="/tag/{{.}}">{{.}}</a>
+            {{end}}
+        </div>
+        {{end}}
+        {{template "base/paginator.html" $}}
+        {{end}}
+    </div>
+    <div class="three wide column">
+        {{template "base/sidebar.html" $}}
+    </div>
+</div>

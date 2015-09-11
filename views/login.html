@@ -1,0 +1,44 @@
+{{set $ "Title" "Login"}}
+<div class="main container">
+    <div class="ui center aligned segment">
+        <div class="ui two column middle aligned relaxed fitted stackable grid">
+            <div class="center aligned column">
+                <div class="huge green ui labeled icon button Register" onclick="window.open('/register','_self')">
+                    <i class="signup icon"></i>
+                    Sign Up
+                </div>
+            </div>
+            <div class="ui vertical divider">
+                Or
+            </div>
+            <div class="column">
+                <div class="ui form segment verifyForm">
+                    <div class="ui negative message" style="display: none">
+                        <i class="close icon"></i>
+                        <div class="header" id="Error"></div>
+                    </div>
+                    <form id="loginForm" class="validate">
+                        <div class="field">
+                            <label>Email</label>
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="email" id="email" placeholder="Input your email">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input name="password" type="password" id="password" placeholder="Input your password">
+                            </div>
+                        </div>
+                        <div class="ui blue button" id="loginSubmit">Login</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    require(['js/console']);
+</script>

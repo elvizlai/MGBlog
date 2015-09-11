@@ -1,0 +1,27 @@
+{{set $ "Title" $.tag}}
+<div class="ui stackable grid" style="padding-bottom: 48px">
+    <div class="sixteen wide column segment">
+        {{with $.articles}}
+        {{range .}}
+        <div class="ui raised segment" style="margin-left: 16px;margin-right: 8px">
+            <a class="ui teal ribbon label">{{dateformat .CreateTime "2006-01-02"}}</a>
+            <a style="font-size: x-large;font-weight: 800;vertical-align: middle" href="/article/{{obj2str .Id}}">{{.Title}}</a>
+            <div class="ui divider"></div>
+            <div class="editormd-view" id="{{obj2str .Id}}">
+                <label>
+                    <textarea style="display:none;">{{.Abstract}}</textarea>
+                </label>
+            </div>
+            <div class="ui divider"></div>
+            {{range .Tags}}
+            <a class="ui tiny tag label" style="margin: 2px 5px 2px 5px" href="/tag/{{.}}">{{.}}</a>
+            {{end}}
+        </div>
+        {{end}}
+        {{template "base/paginator.html" $}}
+        {{end}}
+    </div>
+</div>
+<script>
+    require(['js/index']);
+</script>
