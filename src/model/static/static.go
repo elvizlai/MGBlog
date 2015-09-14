@@ -21,12 +21,13 @@ func init() {
 				for iter.Next(s) {
 					if result := util.InfoGeoByIP(s.IP); result != nil {
 						//添加返回值
-						s.City = result.Get("content").Get("address_detail").Get("city").MustString()
-						s.Geo[0] = util.Str2Float(result.Get("content").Get("point").Get("x").MustString())
-						s.Geo[1] = util.Str2Float(result.Get("content").Get("point").Get("y").MustString())
+						s.City = result.Get("regionName").MustString() + "," + result.Get("city").MustString()
+						s.Geo[0] = result.Get("lon").MustFloat64()
+						s.Geo[1] = result.Get("lat").MustFloat64()
 					}
 					s.Infered = true
 					c.Update(bson.M{"ip":s.IP}, s)
+					<-time.After(time.Second / 10)
 				}
 			})
 			<-time.After(time.Hour)

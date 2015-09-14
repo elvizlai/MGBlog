@@ -10,16 +10,12 @@ import (
 
 
 func TestGeo(t *testing.T) {
-	b := []byte{5, 6, 7}
-	fmt.Println(b)
-	wm(&b)
-	fmt.Println(b)
+	result:=InfoGeoByIP("222.175.234.10")
+	fmt.Println(result)
 
-}
+	fmt.Println(result.Get("regionName").MustString()+","+result.Get("city").MustString())
+	fmt.Println()
+	fmt.Println(result.Get("lon").MustFloat64())
+	fmt.Println(result.Get("lat").MustFloat64())
 
-func wm(picBytes *([]byte)) {
-	n := []byte{1, 2, 3, 4}
-	pic := append(*picBytes,n...)
-	picBytes = &pic
-	fmt.Println(picBytes)
 }

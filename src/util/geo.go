@@ -9,7 +9,7 @@ import (
 	"github.com/bitly/go-simplejson"
 )
 
-const reqStr = "http://api.map.baidu.com/location/ip?ak=rz6QSfBSl6eNU2dmbTQ1ftGQ&ip=%s&coor=bd09ll"
+const reqStr = "http://ip-api.com/json/%s"
 
 func InfoGeoByIP(ip string) *simplejson.Json {
 	req := httplib.Get(fmt.Sprintf(reqStr, ip))
@@ -21,8 +21,8 @@ func InfoGeoByIP(ip string) *simplejson.Json {
 
 	j, _ := simplejson.NewJson(resp)
 
-	status := j.Get("status").MustInt(1)
-	if status == 0 {
+	status := j.Get("status").MustString()
+	if status == "success" {
 		return j
 	}else {
 		return nil
