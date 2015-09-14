@@ -14,18 +14,16 @@ const dbName = "MBlog"
 type collectionName string
 
 const (
-	UserC collectionName = "Users"//用户
-	ArticleC collectionName = "Articles"//文章
-	FileC collectionName = "Files"//文件
-	StatisticC collectionName = "Statistics" //统计分析
-	TrashC collectionName = "Trashes"//回收站
-//FavorC collectionName = "Favors"//收藏
+	UserC collectionName = "Users"//user collection
+	ArticleC collectionName = "Articles"//article collection
+	FileC collectionName = "Files"//file collection
+	StatisticC collectionName = "Statistics" //statistic collection
+	TrashC collectionName = "Trashes"//trash collection for deleted articles
 )
 
 const (
-	historyC collectionName = "History" //历史
-	errorC collectionName = "Errors"//错误日志
-
+	historyC collectionName = "History" //to save articles modify history
+	errorC collectionName = "Errors"//error log
 )
 
 func (this collectionName) String() string {
@@ -41,7 +39,7 @@ func init() {
 	session.SetMode(mgo.Monotonic, true)
 }
 
-//获取session--注意session要及时关闭
+//get a copy of mongo session
 func getSession() *mgo.Session {
 	return session.Copy()
 }
@@ -58,18 +56,21 @@ func databaseDo(dbName string, f func(db *mgo.Database)) {
 	f(s.DB(dbName))
 }
 
+//modify history
 func AddHistory(from collectionName, data interface{}) {
 	historyC.Do(func(c *mgo.Collection) {
 		c.Insert(bson.M{"from":from, "data":data, "createtime":time.Now()})
 	})
 }
 
+//add deleted article to trash
 func Move2Trash(from collectionName, data interface{}) {
 	TrashC.Do(func(c *mgo.Collection) {
 		c.Insert(bson.M{"from":from, "data":data, "createtime":time.Now()})
 	})
 }
 
+//error log
 func ErrorLog(from collectionName, err interface{}, data interface{}) {
 	errorC.Do(func(c *mgo.Collection) {
 		c.Insert(bson.M{"from":from, "err":err, "data":data, "createtime":time.Now()})
