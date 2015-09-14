@@ -107,7 +107,7 @@ func (this *User) Login() {
 			this.RespJson(enum.PasswordIncorrect, nil)
 		}else {
 			this.SetSession("uId", u.Id.Hex())
-			user.SetToken(email, this.StartSession().SessionID())//将浏览器的cookie token写入库中，做异地登录验证
+			user.SetToken(u.Id, this.StartSession().SessionID())//using cookie as token
 			this.RespJson(enum.OK, map[string]interface{}{"url":"/"})
 		}
 	}

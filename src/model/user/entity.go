@@ -13,8 +13,8 @@ type User struct {
 	NickName   string
 	Salt       string
 	Password   string
-	Token      string    //登陆token
-	CreateTime time.Time //创建时间
+	Token      string    //token for login
+	CreateTime time.Time //user create time
 }
 
 func init() {

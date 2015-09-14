@@ -8,7 +8,7 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
-//新建用户
+//create an user, with dup_key error for email or nickname.
 func AddUser(email, nickname, password string) error {
 	salt := util.RandString(8)
 	password = util.Md5(salt + password)
@@ -17,24 +17,26 @@ func AddUser(email, nickname, password string) error {
 	var err error
 	model.UserC.Do(func(c *mgo.Collection) {
 		err = c.Insert(u)
+		if err != nil && !mgo.IsDup(err) {
+			model.ErrorLog(model.UserC, err, u)
+		}
 	})
 
 	return err
 }
 
+//return nil if user not exist
 func GetUserByEmail(email string) *User {
-	u := &User{}
-	var err error
+	u := new(User)
 	model.UserC.Do(func(c *mgo.Collection) {
-		err = c.Find(bson.M{"email":email}).One(u)
+		if c.Find(bson.M{"email":email}).One(u) != nil {
+			u = nil
+		}
 	})
-
-	if err != nil {
-		return nil
-	}
 	return u
 }
 
+//return nil if user not exist
 func GetUserById(id bson.ObjectId) *User {
 	u := new(User)
 	model.UserC.Do(func(c *mgo.Collection) {
@@ -45,14 +47,17 @@ func GetUserById(id bson.ObjectId) *User {
 	return u
 }
 
-func SetToken(email string, token string) {
+//setting token for login user
+func SetToken(id bson.ObjectId, token string) {
 	model.UserC.Do(func(c *mgo.Collection) {
-		c.Update(bson.M{"email":email}, bson.M{"$set":bson.M{"token":token}})
+		if err := c.UpdateId(id, bson.M{"$set":bson.M{"token":token}}); err != nil {
+			model.ErrorLog(model.UserC, err, id.Hex() + ";" + token)
+		}
 	})
 }
 
-//修改密码
-func ChangePwd(email, oriPwd, newPwd string) (err error) {
+//modify password
+func ChangePwd(email, newPwd string) (err error) {
 	salt := util.RandString(8)
 	pwd := util.Md5(salt + newPwd)
 	model.UserC.Do(func(c *mgo.Collection) {
